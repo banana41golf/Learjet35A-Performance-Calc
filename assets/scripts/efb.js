@@ -95,7 +95,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
     document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
 }
-
+ 
 // Interpolation Function
 function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
     function interpolate(x1, x2, f1, f2, x) {
