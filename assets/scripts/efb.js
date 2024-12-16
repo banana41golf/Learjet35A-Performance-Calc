@@ -104,6 +104,14 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
     }
 
     function recursiveInterpolate(data, dims, targets) {
+        console.log("Recursive Step: Data length:", data?.length, "Dims:", dims, "Targets:", targets);
+
+        // Validate data
+        if (!data || !Array.isArray(data) || data.length === 0) {
+            console.error("Invalid data passed to recursiveInterpolate:", data);
+            return undefined;
+        }
+
         if (dims.length === 1) {
             const [dim] = dims;
             const target = targets[0];
@@ -114,6 +122,16 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
                 .sort((a, b) => a.key - b.key);
 
             if (points.length < 2) {
+                console.warn(`Not enough points for interpolation on dim=${dim}, target=${target}`);
+                return undefined;
+            }
+
+            // Check bounds
+            const keys = points.map(p => p.key);
+            const minKey = Math.min(...keys);
+            const maxKey = Math.max(...keys);
+            if (target < minKey || target > maxKey) {
+                console.warn(`Target ${target} out of bounds for dim=${dim} [${minKey}, ${maxKey}]`);
                 return undefined;
             }
 
@@ -129,11 +147,34 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
         const [dim, ...remainingDims] = dims;
         const target = targets[0];
 
-        const lowerGroup = data.filter(d => d[dim] === Math.max(...data.map(d => d[dim]).filter(x => x <= target)));
-        const upperGroup = data.filter(d => d[dim] === Math.min(...data.map(d => d[dim]).filter(x => x >= target)));
+        // Validate target against data range
+        const dimValues = data.map(d => d[dim]).filter(v => v !== undefined);
+        const minValue = Math.min(...dimValues);
+        const maxValue = Math.max(...dimValues);
+
+        if (target < minValue || target > maxValue) {
+            console.warn(`Target ${target} out of bounds for dim=${dim} [${minValue}, ${maxValue}]`);
+            return undefined;
+        }
+
+        // Filter and validate groups
+        const lowerGroup = Array.isArray(data) ? 
+            data.filter(d => d[dim] === Math.max(...data.map(d => d[dim]).filter(x => x <= target))) : [];
+        const upperGroup = Array.isArray(data) ? 
+            data.filter(d => d[dim] === Math.min(...data.map(d => d[dim]).filter(x => x >= target))) : [];
+
+        if (lowerGroup.length === 0 || upperGroup.length === 0) {
+            console.error(`Failed to find valid groups for dim=${dim}, target=${target}`);
+            return undefined;
+        }
 
         const lowerResult = recursiveInterpolate(lowerGroup, remainingDims, targets.slice(1));
         const upperResult = recursiveInterpolate(upperGroup, remainingDims, targets.slice(1));
+
+        if (lowerResult === undefined || upperResult === undefined) {
+            console.warn("Interpolation failed for some groups.");
+            return undefined;
+        }
 
         return interpolate(
             Math.max(...lowerGroup.map(d => d[dim])),
