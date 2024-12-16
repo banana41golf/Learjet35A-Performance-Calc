@@ -1,0 +1,167 @@
+
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="\assets\images\favicon.ico">
+  <title>Learjet 35A Performance Calculator</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="\assets\styles\styles.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+
+</head>
+<body>
+  <div class="container">
+    <h1>Learjet 35A Performance Calculator</h1>
+    <form id="performance-calculator">
+      <!-- Inputs -->
+      <div class="form-group horizontal">
+        <label for="zfw">ZFW:</label>
+        <input type="number" id="zfw" name="zfw" placeholder="lbs" required />
+        <input type="range" id="zfw-slider" min="10350" max="13500" step="50">
+      </div>
+      
+      <div class="form-group horizontal">
+        <label for="fob">FOB:</label>
+        <input type="number" id="fob" name="fob" placeholder="lbs" required />
+        <input type="range" id="fob-slider" min="600" max="6240" step="10">
+      </div>
+      
+      <div class="form-group horizontal">
+        <label for="gw">GW:</label>
+        <input type="text" id="gw" name="gw" placeholder="Calculated Automatically" readonly />
+        <small id="gw-warning" style="color: red; display: none;">
+          <!-- Warning messages appear here dynamically -->
+        </small>
+      </div>
+<!-- Departure Airport (ICAO) Input Field and Dropdown -->
+<div class="form-group horizontal">
+    <label for="departure-airport">Airport ICAO:</label>
+    <input type="text" id="departure-airport" name="departure-airport" placeholder="Enter ICAO code" autocomplete="off" />
+    <select id="airport-suggestions" size="5" style="display:none;">
+        <!-- Dropdown populates here -->
+    </select>
+</div>
+
+<div class="form-group horizontal"><label for="depName">Airport:</label><span id="depName" style="color: #ffffff; font-size: 1rem; font-weight: normal;"></span></div>
+<div class="form-group horizontal"><label for="rawMETAR">METAR:</label><span id="rawMETAR" style="color: #ffffff; font-size: 1rem; font-weight: normal;"></span></div>
+
+        <div class="form-group">
+          <label for="elevation">Field Elevation:</label>
+          <input type="number" id="elevation"></span>
+          <button type="button" id="sync-elevation">REFRESH</button>
+        </div>
+
+          <div class="form-group">
+          <label for="oat">OAT:</label>
+          <input type="number" id="oat">
+          <button type="button" id="sync-oat">REFRESH</button>
+
+        </div>
+
+
+<!-- Outputs -->
+<div class="form-output">
+<div class="output-column">
+<!-- Airport Data -->
+    <strong>Airport Information</strong>
+     <p><label for ="runway-select">Select Runway:</label>
+      <select id="runway-select"><option value=""></option></select></p>
+      <p>
+      <label for="runway-length">Runway Length:</label>
+      <span id="runway-length">N/A</span> <!-- Field to display runway length -->
+    </p><P></P>
+      <strong>Maximum Weights</strong>
+      <p>
+        <label>MTOW:</label>
+        <span id="structural-mtow">18300 lbs</span>
+        <span class="info-icon" id="mtow-icon" data-tooltip="Maximum Takeoff Weight (MTOW) is the highest weight at which the aircraft is certified for takeoff.">
+        </span>
+      </p>
+      <p>
+        <label>RTOW:</label>
+        <span id="rtow-input">-</span>
+        <span class="info-icon" id="rtow-icon" data-tooltip="Regulated Takeoff Weight (RTOW) is the maximum allowable weight for the current takeoff conditions.">
+        </span>
+      </p>
+      <p>
+        <label>MLW:</label>
+        <span id="mlw-input">15300 lbs</span>
+        <span class="info-icon" id="mlw-icon" data-tooltip="Maximum Landing Weight (MLW) is the highest weight at which the aircraft is certified to land.">
+          </span>
+      </p>
+</div>
+
+
+
+
+<!-- Takeoff Performance -->
+        <div class ="output-column">
+        <strong>Takeoff Performance <span class="info-icon" id="toperf-icon" data-tooltip=""> </span></strong>
+
+     <p><label for ="flaps-input">Flaps:</label>
+          <select id="flaps-input">
+            <option value="8">8</option>
+            <option value="20">20</option>
+          </select></p><p>
+        <label for ="mac-input">% of MAC:</label>
+            <input type="number" id="mac-input" name="mac-input" min="5" max="30" step="0.1" placeholder="5.0 - 30.0" required /></p>
+          <label for="trim-output">Stab Trim:</label>
+              <span id="trim-output">-</span>
+              <label for="n1-output">Takeoff N1:</label>
+                  <span id="n1-output">-</span>
+              <label for="v1-output">V1 Speed:</label> 
+                  <span id="v1-output">-</span>
+                <label for="vr-output">VR Speed:</label> 
+                  <span id="vr-output">-</span>
+              <label for="v2-output">V2 Speed:</label> 
+                  <span id="v2-output">-</span>
+                  <label for="distance-output">TO Distance:</label> 
+                  <span id="distance-output">-</span>
+              </div>
+
+<!-- Landing Performance -->
+        <div class ="output-column">
+        <strong>Landing Performance <span class="info-icon" id="ldgperf-icon" data-tooltip=""> </span></strong>
+
+        <p><label for ="landingflaps">Flaps:</label>
+          <select id="landingflaps">
+            <option value="40">40</option>
+          </select></p>                 <p> <label for ="gust-factor">Gust Factor:</label>
+            <select id="gust-factor">
+              <option value="5">5 kts</option>
+              <option value="10">10 kts</option>
+              <option value="15">15 kts</option>
+              <option value="20">20 kts</option>
+            </select></p>
+
+                <label for="vref-output">Vref:</label> 
+                  <span id="vref-output">-</span>
+
+
+                  
+                  <label for="vapp-output">Vapp:</label> 
+                      <span id="vapp-output">-</span>
+<P></P>
+                      <strong>Landing Distance</strong>
+   
+            <label for="ldaa-output">Actual:</label> 
+                  <span id="ldaa-output">-</span>
+             <label for="fact-output">Factored:</label> 
+                  <span id="fact-output">-</span><br>
+             
+                  <span id="mlw-flag" style="color: red;"></span>           
+              </div>
+        </div>
+
+<!-- Calculate Button -->
+<button type="submit">Calculate</button>
+</form>
+</div>
+
+<!-- Javascript -->
+<script src="\assets\scripts\efb.js"></script>
+<script src="\assets\scripts\form.js"></script>
+<script src="\assets\scripts\airport-search.js"></script>
+
+</body>
+</html>
