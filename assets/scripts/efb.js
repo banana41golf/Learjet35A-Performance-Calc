@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         n1Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/N1_flat.json");
         f8MTOWdata = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/f8MTOW.json");
         LDRAData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json");
+        console.log("LDRAData loaded:", LDRAData);
         LDRFData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact.json");
 
         console.log("All data loaded successfully.");
