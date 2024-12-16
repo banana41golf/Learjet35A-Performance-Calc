@@ -10,20 +10,21 @@ document.addEventListener("DOMContentLoaded", () => {
         const filePaths = {
             n1Data: "/Learjet35A-Performance-Calc/assets/data/N1_flat.json",
             f8ToData: "/Learjet35A-Performance-Calc/assets/data/F8-TO_flat.json",
-            f8DisData: "/Learjet35A-Performance-Calc//assets/data/F8-DIS_flat.json",
+            f8DisData: "/Learjet35A-Performance-Calc/assets/data/F8-DIS_flat.json",
             vrData: "/Learjet35A-Performance-Calc/assets/data/VR_flat.json",
             v2Data: "/Learjet35A-Performance-Calc/assets/data/V2_flat.json",
             vrefData: "/Learjet35A-Performance-Calc/assets/data/vref.json",
             ldaData: "/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json",
-            factData: "/Learjet35A-Performance-Calc/ssets/data/fact.json",
-            trimData: "/Learjet35A-Performance-Calc/ssets/data/trim.json",
+            factData: "/Learjet35A-Performance-Calc/assets/data/fact.json",
+            trimData: "/Learjet35A-Performance-Calc/assets/data/trim.json",
             f20ToData: "/Learjet35A-Performance-Calc/assets/data/F20-TO.json",
-            f20DisData: "/Learjet35A-Performance-Calc//assets/data/F20-DIS.json",
+            f20DisData: "/Learjet35A-Performance-Calc/assets/data/F20-DIS.json",
             f20vrData: "/Learjet35A-Performance-Calc/assets/data/VR-20.json",
             f20v2Data: "/Learjet35A-Performance-Calc/assets/data/V2-20.json",
             f8MTOWdata: "/Learjet35A-Performance-Calc/assets/data/f8MTOW.json",
             f20MTOWdata: "/Learjet35A-Performance-Calc/assets/data/f20MTOW.json",
         };
+        
         const data = {};
     
         try {
