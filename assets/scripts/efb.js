@@ -8,21 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     async function loadData() {
         const filePaths = {
-            n1Data: "https://shidfardkus.me/assets/data/N1_flat.json",
-            f8ToData: "https://shidfardkus.me/assets/data/F8-TO_flat.json",
-            f8DisData: "https://shidfardkus.me/assets/data/F8-DIS_flat.json",
-            vrData: "https://shidfardkus.me/assets/data/VR_flat.json",
-            v2Data: "https://shidfardkus.me/assets/data/V2_flat.json",
-            vrefData: "https://shidfardkus.me/assets/data/vref.json",
-            ldaData: "https://shidfardkus.me/assets/data/LDAA_flat.json",
-            factData: "https://shidfardkus.me/assets/data/fact.json",
-            trimData: "https://shidfardkus.me/assets/data/trim.json",
-            f20ToData: "https://shidfardkus.me/assets/data/F20-TO.json",
-            f20DisData: "https://shidfardkus.me/assets/data/F20-DIS.json",
-            f20vrData: "https://shidfardkus.me/assets/data/VR-20.json",
-            f20v2Data: "https://shidfardkus.me/assets/data/V2-20.json",
-            f8MTOWdata: "https://shidfardkus.me/assets/data/f8MTOW.json",
-            f20MTOWdata: "https://shidfardkus.me/assets/data/f20MTOW.json",
+            n1Data: "/Learjet35A-Performance-Calc/assets/data/N1_flat.json",
+            f8ToData: "/Learjet35A-Performance-Calc/assets/data/F8-TO_flat.json",
+            f8DisData: "/Learjet35A-Performance-Calc//assets/data/F8-DIS_flat.json",
+            vrData: "/Learjet35A-Performance-Calc/assets/data/VR_flat.json",
+            v2Data: "/Learjet35A-Performance-Calc/assets/data/V2_flat.json",
+            vrefData: "/Learjet35A-Performance-Calc/assets/data/vref.json",
+            ldaData: "/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json",
+            factData: "/Learjet35A-Performance-Calc/ssets/data/fact.json",
+            trimData: "/Learjet35A-Performance-Calc/ssets/data/trim.json",
+            f20ToData: "/Learjet35A-Performance-Calc/assets/data/F20-TO.json",
+            f20DisData: "/Learjet35A-Performance-Calc//assets/data/F20-DIS.json",
+            f20vrData: "/Learjet35A-Performance-Calc/assets/data/VR-20.json",
+            f20v2Data: "/Learjet35A-Performance-Calc/assets/data/V2-20.json",
+            f8MTOWdata: "/Learjet35A-Performance-Calc/assets/data/f8MTOW.json",
+            f20MTOWdata: "/Learjet35A-Performance-Calc/assets/data/f20MTOW.json",
         };
         const data = {};
     
