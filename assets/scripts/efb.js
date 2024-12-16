@@ -61,11 +61,11 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     console.log(`Inputs: OAT=${oat}, GW=${gw}, Elevation=${elevation}, Flaps=${flaps}`);
 
     // Perform calculations
-    let v1, distance, n1;
+    let v1, TOdistance, n1;
 
     if (flaps === 8) {
         v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
-        distance = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+        TOdistance = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
     } else {
         console.error("Flaps configuration not supported in this refactored code.");
         return;
@@ -77,7 +77,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
 
     // Update UI
     document.getElementById("v1-output").innerText = v1 ? `${Math.round(v1)} knots` : "N/A";
-    document.getElementById("distance-output").innerText = distance ? `${Math.round(distance)} ft` : "N/A";
+    document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
     document.getElementById("n1-output").innerText = n1 ? n1.toFixed(1) : "N/A";
 }
 
