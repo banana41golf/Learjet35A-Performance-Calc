@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
             f8MTOWdata: "/Learjet35A-Performance-Calc/assets/data/f8MTOW.json",
             f20MTOWdata: "/Learjet35A-Performance-Calc/assets/data/f20MTOW.json",
         };
-        
+    
         const data = {};
     
         try {
@@ -34,8 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     try {
                         console.log(`Fetching ${path}...`);
                         const response = await fetch(path);
-                        
-                        // Check for valid response
+    
                         if (!response.ok) {
                             throw new Error(`Failed to fetch ${path}. Status: ${response.status}`);
                         }
@@ -46,20 +45,21 @@ document.addEventListener("DOMContentLoaded", () => {
                         }
     
                         data[key] = await response.json();
-                        console.log(`Loaded ${key}:`, data[key].slice(0, 2)); // Log first two entries as a sample
+                        console.log(`Loaded ${key}:`, data[key]?.slice(0, 2)); // Log first two entries as a sample
                     } catch (error) {
                         console.error(`Error loading ${key} from ${path}:`, error);
                         data[key] = []; // Assign an empty array as fallback
                     }
                 })
             );
-            console.log("All data loaded:", data);
+            console.log("All data loaded successfully:", data);
         } catch (error) {
             console.error("Critical error during data loading:", error);
         }
     
-        return data; // Return the loaded data object for further use
+        return data; // Return the loaded data object
     }
+    
 
     document.addEventListener("DOMContentLoaded", async () => {
         const loadedData = await loadData();
