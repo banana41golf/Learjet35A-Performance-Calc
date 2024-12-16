@@ -12,9 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         v2Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/V2_flat.json");
         n1Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/N1_flat.json");
         f8MTOWdata = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/f8MTOW.json");
-        LDRAData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json");
-        console.log("LDRAData loaded:", LDRAData);
-        LDRFData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact.json");
+        ldgDistAData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json");
+        ldgDistFData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact.json");
 
         console.log("All data loaded successfully.");
     } catch (error) {
@@ -45,7 +44,7 @@ async function fetchJSON(path) {
 }
 
 // Calculation handler
-function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata) {
+function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData) {
     const oatInput = document.getElementById("oat");
     const gwInput = document.getElementById("gw");
     const elevationInput = document.getElementById("elevation");
@@ -79,8 +78,8 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     }
 
     n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
-    ldgDistA = interpolateMultiDimensional(LDRAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
-    ldgDistF =  interpolateMultiDimensional(LDRFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
 
     console.log(`Results: V1=${v1}, TO Distance=${TOdistance}, N1=${n1}, VR=${vR}, V2=${v2}, LDG-DIST(A)${ldgDistA}, LDG-DIST(B)${ldgDistF}`);
 
