@@ -75,7 +75,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
 
     n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
 
-    console.log(`Results: V1=${v1}, Distance=${distance}, N1=${n1}, V2=${v2}`);
+    console.log(`Results: V1=${v1}, Distance=${TOdistance}, N1=${n1}, V2=${v2}`);
 
     // Update UI
     document.getElementById("v1-output").innerText = v1 ? `${Math.round(v1)} knots` : "N/A";
