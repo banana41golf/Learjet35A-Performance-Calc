@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     // Declare variables for datasets
-    let f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData;
+    let f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, LDRA, LDRF;
 
     // Fetch and load JSON files
     try {
@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         v2Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/V2_flat.json");
         n1Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/N1_flat.json");
         f8MTOWdata = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/f8MTOW.json");
-        ldgDistAData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json");
-        ldgDistFData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact.json");
+        LDRA = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json");
+        LDRF = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact.json");
 
         console.log("All data loaded successfully.");
     } catch (error) {
@@ -78,8 +78,8 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     }
 
     n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
-    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
-    ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistA = interpolateMultiDimensional(LDRA, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistF =  interpolateMultiDimensional(LDRF, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
 
     console.log(`Results: V1=${v1}, TO Distance=${TOdistance}, N1=${n1}, VR=${vR}, V2=${v2}, LDG-DIST(A)${ldgDistA}, LDG-DIST(B)${ldgDistF}`);
 
