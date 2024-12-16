@@ -535,12 +535,6 @@
     },
     {
         "Elevation": 4000.0,
-        "GW": 15300.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 4000.0,
         "GW": 15000.0,
         "OAT": -18.0,
         "Distance": 5112.0
@@ -568,12 +562,6 @@
         "GW": 15000.0,
         "OAT": 27.0,
         "Distance": 5617.0
-    },
-    {
-        "Elevation": 4000.0,
-        "GW": 15000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 4000.0,
@@ -787,12 +775,6 @@
     },
     {
         "Elevation": 6000.0,
-        "GW": 15300.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 6000.0,
         "GW": 15000.0,
         "OAT": -18.0,
         "Distance": 5380.0
@@ -823,12 +805,6 @@
     },
     {
         "Elevation": 6000.0,
-        "GW": 15000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 6000.0,
         "GW": 14000.0,
         "OAT": -18.0,
         "Distance": 5099.0
@@ -856,12 +832,6 @@
         "GW": 14000.0,
         "OAT": 27.0,
         "Distance": 5560.0
-    },
-    {
-        "Elevation": 6000.0,
-        "GW": 14000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 6000.0,
@@ -1033,18 +1003,6 @@
     },
     {
         "Elevation": 8000.0,
-        "GW": 15300.0,
-        "OAT": 27.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 8000.0,
-        "GW": 15300.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 8000.0,
         "GW": 15000.0,
         "OAT": -18.0,
         "Distance": 5664.0
@@ -1066,18 +1024,6 @@
         "GW": 15000.0,
         "OAT": 16.0,
         "Distance": 6119.0
-    },
-    {
-        "Elevation": 8000.0,
-        "GW": 15000.0,
-        "OAT": 27.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 8000.0,
-        "GW": 15000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 8000.0,
@@ -1111,12 +1057,6 @@
     },
     {
         "Elevation": 8000.0,
-        "GW": 14000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 8000.0,
         "GW": 13000.0,
         "OAT": -18.0,
         "Distance": 5069.0
@@ -1144,12 +1084,6 @@
         "GW": 13000.0,
         "OAT": 27.0,
         "Distance": 5562.0
-    },
-    {
-        "Elevation": 8000.0,
-        "GW": 13000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 8000.0,
@@ -1183,12 +1117,6 @@
     },
     {
         "Elevation": 8000.0,
-        "GW": 12000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 8000.0,
         "GW": 11000.0,
         "OAT": -18.0,
         "Distance": 4575.0
@@ -1216,12 +1144,6 @@
         "GW": 11000.0,
         "OAT": 27.0,
         "Distance": 5004.0
-    },
-    {
-        "Elevation": 8000.0,
-        "GW": 11000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 8000.0,
@@ -1254,12 +1176,6 @@
         "Distance": 4719.0
     },
     {
-        "Elevation": 8000.0,
-        "GW": 10000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
         "Elevation": 10000.0,
         "GW": 15300.0,
         "OAT": -18.0,
@@ -1276,24 +1192,6 @@
         "GW": 15300.0,
         "OAT": 4.0,
         "Distance": 6445.0
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 15300.0,
-        "OAT": 16.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 15300.0,
-        "OAT": 27.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 15300.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 10000.0,
@@ -1321,18 +1219,6 @@
     },
     {
         "Elevation": 10000.0,
-        "GW": 15000.0,
-        "OAT": 27.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 15000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
         "GW": 14000.0,
         "OAT": -18.0,
         "Distance": 5635.0
@@ -1354,18 +1240,6 @@
         "GW": 14000.0,
         "OAT": 16.0,
         "Distance": 6055.0
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 14000.0,
-        "OAT": 27.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 14000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 10000.0,
@@ -1399,12 +1273,6 @@
     },
     {
         "Elevation": 10000.0,
-        "GW": 13000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
         "GW": 12000.0,
         "OAT": -18.0,
         "Distance": 5100.0
@@ -1432,12 +1300,6 @@
         "GW": 12000.0,
         "OAT": 27.0,
         "Distance": 5607.0
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 12000.0,
-        "OAT": 38.0,
-        "Distance": null
     },
     {
         "Elevation": 10000.0,
@@ -1471,12 +1333,6 @@
     },
     {
         "Elevation": 10000.0,
-        "GW": 11000.0,
-        "OAT": 38.0,
-        "Distance": null
-    },
-    {
-        "Elevation": 10000.0,
         "GW": 10000.0,
         "OAT": -18.0,
         "Distance": 4545.0
@@ -1504,11 +1360,5 @@
         "GW": 10000.0,
         "OAT": 27.0,
         "Distance": 4959.0
-    },
-    {
-        "Elevation": 10000.0,
-        "GW": 10000.0,
-        "OAT": 38.0,
-        "Distance": null
     }
 ]
