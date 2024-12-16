@@ -80,3 +80,54 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     document.getElementById("distance-output").innerText = distance ? `${Math.round(distance)} ft` : "N/A";
     document.getElementById("n1-output").innerText = n1 ? n1.toFixed(1) : "N/A";
 }
+
+// Interpolation Function
+function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
+    function interpolate(x1, x2, f1, f2, x) {
+        if (x1 === x2) return f1; // Avoid division by zero
+        return f1 + ((f2 - f1) / (x2 - x1)) * (x - x1);
+    }
+
+    function recursiveInterpolate(data, dims, targets) {
+        if (dims.length === 1) {
+            const [dim] = dims;
+            const target = targets[0];
+
+            const points = data
+                .filter(d => d[dim] !== undefined && d[outputField] !== undefined)
+                .map(d => ({ key: d[dim], value: d[outputField] }))
+                .sort((a, b) => a.key - b.key);
+
+            if (points.length < 2) {
+                return undefined;
+            }
+
+            const lower = Math.max(...points.filter(p => p.key <= target).map(p => p.key));
+            const upper = Math.min(...points.filter(p => p.key >= target).map(p => p.key));
+
+            const lowerValue = points.find(p => p.key === lower)?.value;
+            const upperValue = points.find(p => p.key === upper)?.value;
+
+            return interpolate(lower, upper, lowerValue, upperValue, target);
+        }
+
+        const [dim, ...remainingDims] = dims;
+        const target = targets[0];
+
+        const lowerGroup = data.filter(d => d[dim] === Math.max(...data.map(d => d[dim]).filter(x => x <= target)));
+        const upperGroup = data.filter(d => d[dim] === Math.min(...data.map(d => d[dim]).filter(x => x >= target)));
+
+        const lowerResult = recursiveInterpolate(lowerGroup, remainingDims, targets.slice(1));
+        const upperResult = recursiveInterpolate(upperGroup, remainingDims, targets.slice(1));
+
+        return interpolate(
+            Math.max(...lowerGroup.map(d => d[dim])),
+            Math.min(...upperGroup.map(d => d[dim])),
+            lowerResult,
+            upperResult,
+            target
+        );
+    }
+
+    return recursiveInterpolate(data, inputs, targetValues);
+}
