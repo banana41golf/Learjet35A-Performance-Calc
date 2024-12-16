@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return; // Exit if any file fails to load
     }
 
+
     // Attach event listener to the calculate button
     const calculateButton = document.querySelector("button[type='submit']");
     calculateButton.addEventListener("click", (event) => {
@@ -66,7 +67,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     if (flaps === 8) {
         v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
         TOdistance = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
-        v2 = interpolateMultiDimensional(v2data, ["GW"], [gw], "V2");
+        v2 = interpolateMultiDimensional(v2Data, ["GW"], [gw], "V2");
     } else {
         console.error("Flaps configuration not supported in this refactored code.");
         return;
