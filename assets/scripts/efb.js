@@ -158,10 +158,19 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
         }
 
         // Filter and validate groups
-        const lowerGroup = Array.isArray(data) ? 
-            data.filter(d => d[dim] === Math.max(...data.map(d => d[dim]).filter(x => x <= target))) : [];
-        const upperGroup = Array.isArray(data) ? 
-            data.filter(d => d[dim] === Math.min(...data.map(d => d[dim]).filter(x => x >= target))) : [];
+        const lowerMax = Math.max(...data.map(d => d[dim]).filter(x => x <= target));
+        const upperMin = Math.min(...data.map(d => d[dim]).filter(x => x >= target));
+        
+        const lowerGroup = data.filter(d => d[dim] === lowerMax);
+        const upperGroup = data.filter(d => d[dim] === upperMin);
+        
+        // Debug and validate
+        console.log("Filtered Groups -> Lower:", lowerGroup, "Upper:", upperGroup, "Target:", target);
+        if (lowerGroup.length === 0 || upperGroup.length === 0) {
+            console.error(`No valid groups found for dim=${dim}, target=${target}`);
+            console.error("Original Data Length:", data.length, "Data Sample:", data.slice(0, 5));
+            return undefined;
+        }        
 
         if (lowerGroup.length === 0 || upperGroup.length === 0) {
             console.error(`Failed to find valid groups for dim=${dim}, target=${target}`);
