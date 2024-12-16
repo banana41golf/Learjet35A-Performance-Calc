@@ -12,6 +12,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         v2Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/V2_flat.json");
         n1Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/N1_flat.json");
         f8MTOWdata = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/f8MTOW.json");
+        ldgDistAData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat.json");
+        ldgDistFData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact.json");
 
         console.log("All data loaded successfully.");
     } catch (error) {
@@ -62,28 +64,36 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     console.log(`Inputs: OAT=${oat}, GW=${gw}, Elevation=${elevation}, Flaps=${flaps}`);
 
     // Perform calculations
-    let v1, TOdistance, n1, vR, v2;
+    let v1, TOdistance, n1, vR, v2, ldgDistA, ldgDistF;
 
     if (flaps === 8) {
         v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
         TOdistance = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
         vR = interpolateMultiDimensional(vrData, ["GW"], [gw], "VR");
         v2 = interpolateMultiDimensional(v2Data, ["GW"], [gw], "V2");
+
     } else {
         console.error("Flaps configuration not supported in this refactored code.");
         return;
     }
 
     n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
+    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
 
     console.log(`Results: V1=${v1}, Distance=${TOdistance}, N1=${n1}, V2=${v2}`);
 
     // Update UI
+    // Takeoff Section Items
+    document.getElementById("n1-output").innerText = n1 ? n1.toFixed(1) : "N/A";
     document.getElementById("v1-output").innerText = v1 ? `${Math.round(v1)} knots` : "N/A";
     document.getElementById("vr-output").innerText = vR ? `${Math.round(vR)} knots` : "N/A";
     document.getElementById("v2-output").innerText = v2 ? `${Math.round(v2)} knots` : "N/A";
     document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
-    document.getElementById("n1-output").innerText = n1 ? n1.toFixed(1) : "N/A";
+
+    // Landing Section Items
+    document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
+    document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
 }
 
 // Interpolation Function
