@@ -180,10 +180,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
 
     // Perform calculations
     let v1, TOdistance, n1, vR, v2, ldgDistAct, ldgDistFact;
-    if (!ldgDistAData || !ldgDistFData) {
-        console.error("Landing distance data is undefined. Check JSON fetch.");
-        return;
-    }
+
     
 
 
