@@ -81,7 +81,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     }
 
     n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
-    ldgDistA = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
     ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
 
     console.log(`Results: V1=${v1}, TO Distance=${TOdistance}, N1=${n1}, VR=${vR}, V2=${v2}, LDG-DIST(A)${ldgDistA}, LDG-DIST(B)${ldgDistF}`);
@@ -116,12 +116,16 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
             return undefined;
         }
 
-        // Debug: Log exact matches for the given target values
+        // Check for an exact match and return it immediately
         const exactMatch = data.find(d =>
             dims.every((dim, index) => d[dim] === targets[index])
         );
-        console.log("Exact Match Check ->", exactMatch ? exactMatch : "No exact match found");
+        if (exactMatch) {
+            console.log("Returning Exact Match ->", exactMatch[outputField]);
+            return exactMatch[outputField];
+        }
 
+        // Base case: final dimension
         if (dims.length === 1) {
             const [dim] = dims;
             const target = targets[0];
@@ -138,11 +142,12 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
                 return undefined;
             }
 
-            // Check bounds
+            // Check bounds with tolerance
             const keys = points.map(p => p.key);
             const minKey = Math.min(...keys);
             const maxKey = Math.max(...keys);
-            if (target < minKey || target > maxKey) {
+
+            if (target < minKey - 1e-6 || target > maxKey + 1e-6) {
                 console.warn(`Target ${target} out of bounds for dim=${dim} [${minKey}, ${maxKey}]`);
                 return undefined;
             }
@@ -150,8 +155,8 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
             const lower = Math.max(...points.filter(p => p.key <= target).map(p => p.key));
             const upper = Math.min(...points.filter(p => p.key >= target).map(p => p.key));
 
-            const lowerValue = points.find(p => p.key === lower)?.value;
-            const upperValue = points.find(p => p.key === upper)?.value;
+            const lowerValue = points.find(p => Math.abs(p.key - lower) < 1e-6)?.value;
+            const upperValue = points.find(p => Math.abs(p.key - upper) < 1e-6)?.value;
 
             console.log(`Interpolating final values -> Lower: (${lower}, ${lowerValue}), Upper: (${upper}, ${upperValue}), Target: ${target}`);
             return interpolate(lower, upper, lowerValue, upperValue, target);
@@ -166,18 +171,18 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
         const maxValue = Math.max(...dimValues);
 
         console.log(`Checking bounds for dim=${dim} -> Min: ${minValue}, Max: ${maxValue}, Target: ${target}`);
-        if (target < minValue || target > maxValue) {
+        if (target < minValue - 1e-6 || target > maxValue + 1e-6) {
             console.warn(`Target ${target} out of bounds for dim=${dim} [${minValue}, ${maxValue}]`);
             return undefined;
         }
 
-        // Filter and validate groups
+        // Filter and validate groups with tolerance
         const lowerMax = Math.max(...data.map(d => d[dim]).filter(x => x <= target));
         const upperMin = Math.min(...data.map(d => d[dim]).filter(x => x >= target));
         
         console.log(`Filtering data for dim=${dim}, target=${target} -> LowerMax: ${lowerMax}, UpperMin: ${upperMin}`);
-        const lowerGroup = data.filter(d => d[dim] === lowerMax);
-        const upperGroup = data.filter(d => d[dim] === upperMin);
+        const lowerGroup = data.filter(d => Math.abs(d[dim] - lowerMax) < 1e-6);
+        const upperGroup = data.filter(d => Math.abs(d[dim] - upperMin) < 1e-6);
         
         // Debug and validate
         console.log("Filtered Groups -> Lower:", lowerGroup, "Upper:", upperGroup, "Target:", target);
