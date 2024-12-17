@@ -177,7 +177,12 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     console.log(`Inputs: OAT=${oat}, GW=${gw}, Elevation=${elevation}, Flaps=${flaps}`);
 
     // Perform calculations
-    let v1, TOdistance, n1, vR, v2, vref, ldgDistAct, ldgDistFact;
+    let v1, TOdistance, n1, vR, v2, ldgDistAct, ldgDistFact;
+    if (!ldgDistAData || !ldgDistFData) {
+        console.error("Landing distance data is undefined. Check JSON fetch.");
+        return;
+    }
+    
 
     if (flaps === 8) {
         v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
