@@ -1,6 +1,8 @@
+let f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData;
+
 document.addEventListener("DOMContentLoaded", async () => {
     // Declare variables for datasets
-    let f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData;
+
 
     // Fetch and load JSON files
     try {
