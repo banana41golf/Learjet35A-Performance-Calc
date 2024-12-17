@@ -122,6 +122,8 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
                 .map(d => ({ key: d[dim], value: d[outputField] }))
                 .sort((a, b) => a.key - b.key);
 
+            console.log("Points for final interpolation:", points);
+
             if (points.length < 2) {
                 console.warn(`Not enough points for interpolation on dim=${dim}, target=${target}`);
                 return undefined;
@@ -142,6 +144,7 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
             const lowerValue = points.find(p => p.key === lower)?.value;
             const upperValue = points.find(p => p.key === upper)?.value;
 
+            console.log(`Interpolating final values -> Lower: (${lower}, ${lowerValue}), Upper: (${upper}, ${upperValue}), Target: ${target}`);
             return interpolate(lower, upper, lowerValue, upperValue, target);
         }
 
@@ -153,6 +156,7 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
         const minValue = Math.min(...dimValues);
         const maxValue = Math.max(...dimValues);
 
+        console.log(`Checking bounds for dim=${dim} -> Min: ${minValue}, Max: ${maxValue}, Target: ${target}`);
         if (target < minValue || target > maxValue) {
             console.warn(`Target ${target} out of bounds for dim=${dim} [${minValue}, ${maxValue}]`);
             return undefined;
@@ -162,6 +166,7 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
         const lowerMax = Math.max(...data.map(d => d[dim]).filter(x => x <= target));
         const upperMin = Math.min(...data.map(d => d[dim]).filter(x => x >= target));
         
+        console.log(`Filtering data for dim=${dim}, target=${target} -> LowerMax: ${lowerMax}, UpperMin: ${upperMin}`);
         const lowerGroup = data.filter(d => d[dim] === lowerMax);
         const upperGroup = data.filter(d => d[dim] === upperMin);
         
@@ -173,14 +178,10 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
             return undefined;
         }        
 
-        if (lowerGroup.length === 0 || upperGroup.length === 0) {
-            console.error(`Failed to find valid groups for dim=${dim}, target=${target}`);
-            return undefined;
-        }
-
         const lowerResult = recursiveInterpolate(lowerGroup, remainingDims, targets.slice(1));
         const upperResult = recursiveInterpolate(upperGroup, remainingDims, targets.slice(1));
 
+        console.log(`Results from recursion -> LowerResult: ${lowerResult}, UpperResult: ${upperResult}`);
         if (lowerResult === undefined || upperResult === undefined) {
             console.warn("Interpolation failed for some groups.");
             return undefined;
