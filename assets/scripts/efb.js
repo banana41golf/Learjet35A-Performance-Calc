@@ -145,13 +145,7 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
             const upperValue = points.find(p => p.key === upper)?.value;
 
             console.log(`Interpolating final values -> Lower: (${lower}, ${lowerValue}), Upper: (${upper}, ${upperValue}), Target: ${target}`);
-            const lowerDim = Math.max(...lowerGroup.map(d => d[dim]));
-            const upperDim = Math.min(...upperGroup.map(d => d[dim]));
-            
-            console.log(`Final Interpolation Inputs -> LowerDim: ${lowerDim}, UpperDim: ${upperDim}, LowerResult: ${lowerResult}, UpperResult: ${upperResult}, Target: ${target}`);
-            
-            return interpolate(lowerDim, upperDim, lowerResult, upperResult, target);
-            
+            return interpolate(lower, upper, lowerValue, upperValue, target);
         }
 
         const [dim, ...remainingDims] = dims;
