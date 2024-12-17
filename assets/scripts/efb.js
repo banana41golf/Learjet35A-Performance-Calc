@@ -95,7 +95,6 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
 
     // Landing Section Items
-    document.getElementById("vref-output").innerText = vref ? `${Math.round(vref)} ft` : "N/A";
     document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
     document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
 }
