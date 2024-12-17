@@ -46,59 +46,8 @@ async function fetchJSON(path) {
     return response.json();
 }
 
-// Calculation handler
-function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData) {
-    const oatInput = document.getElementById("oat");
-    const gwInput = document.getElementById("gw");
-    const elevationInput = document.getElementById("elevation");
-    const flapsInput = document.getElementById("flaps-input");
+// Interpolation
 
-    const oat = parseInt(oatInput.value, 10);
-    const gw = parseInt(gwInput.value, 10);
-    const elevation = parseInt(elevationInput.value, 10);
-    const flaps = parseInt(flapsInput.value, 10);
-
-    // Input validation
-    if (isNaN(oat) || isNaN(gw) || isNaN(elevation)) {
-        alert("Please ensure all inputs are valid numbers.");
-        return;
-    }
-
-    console.log(`Inputs: OAT=${oat}, GW=${gw}, Elevation=${elevation}, Flaps=${flaps}`);
-
-    // Perform calculations
-    let v1, TOdistance, n1, vR, v2, vref, ldgDistA, ldgDistF;
-
-    if (flaps === 8) {
-        v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
-        TOdistance = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
-        vR = interpolateMultiDimensional(vrData, ["GW"], [gw], "VR");
-        v2 = interpolateMultiDimensional(v2Data, ["GW"], [gw], "V2");
-
-    } else {
-        console.error("Flaps configuration not supported in this refactored code.");
-        return;
-    }
-
-    n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
-    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
-    ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
-
-    console.log(`Results: V1=${v1}, TO Distance=${TOdistance}, N1=${n1}, VR=${vR}, V2=${v2}, LDG-DIST(A)${ldgDistA}, LDG-DIST(B)${ldgDistF}`);
-
-    // Update UI
-    // Takeoff Section Items
-    document.getElementById("n1-output").innerText = n1 ? n1.toFixed(1) : "N/A";
-    document.getElementById("v1-output").innerText = v1 ? `${Math.round(v1)} knots` : "N/A";
-    document.getElementById("vr-output").innerText = vR ? `${Math.round(vR)} knots` : "N/A";
-    document.getElementById("v2-output").innerText = v2 ? `${Math.round(v2)} knots` : "N/A";
-    document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
-
-    // Landing Section Items
-    document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
-    document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
-}
- 
 // Interpolation Function
 function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
     function interpolate(x1, x2, f1, f2, x) {
@@ -211,3 +160,58 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
 
     return recursiveInterpolate(data, inputs, targetValues);
 }
+
+// Calculation handler
+function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData) {
+    const oatInput = document.getElementById("oat");
+    const gwInput = document.getElementById("gw");
+    const elevationInput = document.getElementById("elevation");
+    const flapsInput = document.getElementById("flaps-input");
+
+    const oat = parseInt(oatInput.value, 10);
+    const gw = parseInt(gwInput.value, 10);
+    const elevation = parseInt(elevationInput.value, 10);
+    const flaps = parseInt(flapsInput.value, 10);
+
+    // Input validation
+    if (isNaN(oat) || isNaN(gw) || isNaN(elevation)) {
+        alert("Please ensure all inputs are valid numbers.");
+        return;
+    }
+
+    console.log(`Inputs: OAT=${oat}, GW=${gw}, Elevation=${elevation}, Flaps=${flaps}`);
+
+    // Perform calculations
+    let v1, TOdistance, n1, vR, v2, vref, ldgDistA, ldgDistF;
+
+    if (flaps === 8) {
+        v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
+        TOdistance = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+        vR = interpolateMultiDimensional(vrData, ["GW"], [gw], "VR");
+        v2 = interpolateMultiDimensional(v2Data, ["GW"], [gw], "V2");
+
+    } else {
+        console.error("Flaps configuration not supported in this refactored code.");
+        return;
+    }
+
+    n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
+    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+
+    console.log(`Results: V1=${v1}, TO Distance=${TOdistance}, N1=${n1}, VR=${vR}, V2=${v2}, LDG-DIST(A)${ldgDistA}, LDG-DIST(B)${ldgDistF}`);
+
+    // Update UI
+    // Takeoff Section Items
+    document.getElementById("n1-output").innerText = n1 ? n1.toFixed(1) : "N/A";
+    document.getElementById("v1-output").innerText = v1 ? `${Math.round(v1)} knots` : "N/A";
+    document.getElementById("vr-output").innerText = vR ? `${Math.round(vR)} knots` : "N/A";
+    document.getElementById("v2-output").innerText = v2 ? `${Math.round(v2)} knots` : "N/A";
+    document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
+
+    // Landing Section Items
+    document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
+    document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
+}
+ 
+
