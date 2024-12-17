@@ -81,7 +81,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     }
 
     n1 = interpolateMultiDimensional(n1Data, ["OAT", "Elevation"], [oat, elevation], "N1");
-    ldgDistA = interpolateMultiDimensional(ldgDistAData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
+    ldgDistA = interpolateMultiDimensional(f8DisData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
     ldgDistF =  interpolateMultiDimensional(ldgDistFData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "Distance");
 
     console.log(`Results: V1=${v1}, TO Distance=${TOdistance}, N1=${n1}, VR=${vR}, V2=${v2}, LDG-DIST(A)${ldgDistA}, LDG-DIST(B)${ldgDistF}`);
