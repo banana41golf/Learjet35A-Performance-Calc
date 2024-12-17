@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     // Declare variables for datasets
-    let f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, LDRAData, LDRFData;
+    let f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWdata, ldgDistAData, ldgDistFData;
 
     // Fetch and load JSON files
     try {
@@ -64,7 +64,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     console.log(`Inputs: OAT=${oat}, GW=${gw}, Elevation=${elevation}, Flaps=${flaps}`);
 
     // Perform calculations
-    let v1, TOdistance, n1, vR, v2, ldgDistA, ldgDistF;
+    let v1, TOdistance, n1, vR, v2, vref, ldgDistA, ldgDistF;
 
     if (flaps === 8) {
         v1 = interpolateMultiDimensional(f8ToData, ["OAT", "Elevation", "GW"], [oat, elevation, gw], "V1");
@@ -92,6 +92,7 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
 
     // Landing Section Items
+    document.getElementById("vref-output").innerText = vref ? `${Math.round(vref)} ft` : "N/A";
     document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
     document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
 }
