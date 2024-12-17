@@ -113,6 +113,12 @@ function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
             return undefined;
         }
 
+        // Debug: Log exact matches for the given target values
+        const exactMatch = data.find(d =>
+            dims.every((dim, index) => d[dim] === targets[index])
+        );
+        console.log("Exact Match Check ->", exactMatch ? exactMatch : "No exact match found");
+
         if (dims.length === 1) {
             const [dim] = dims;
             const target = targets[0];
