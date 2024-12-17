@@ -8,14 +8,15 @@ document.addEventListener("DOMContentLoaded", async () => {
         
         f8ToData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/F8-TO_flat.json");
         f8DisData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/F8-DIS_flat.json");
+        console.log(`F8TO DATA: ${f8DisData}`);
         vrData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/VR_flat.json");
         v2Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/V2_flat.json");
         n1Data = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/N1_flat.json");
         f8MTOWdata = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/f8MTOW.json");
         ldgDistAData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/LDAA_flat_int.json");
-        console.log(ldgDistAData);
+        console.log(`LDGA DATA: ${ldgDistAData}`);
         ldgDistFData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/fact_int.json");
-        console.log(ldgDistFData);
+        console.log(`LDGA DATA: ${ldgDistFData}`);
 
         console.log("All data loaded successfully.");
     } catch (error) {
