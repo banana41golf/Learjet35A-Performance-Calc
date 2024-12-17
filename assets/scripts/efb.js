@@ -5,7 +5,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     // Fetch and load JSON files
     try {
         console.log("Starting to load JSON data...");
-        
         f8ToData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/F8-TO_flat.json");
         f8DisData = await fetchJSON("/Learjet35A-Performance-Calc/assets/data/F8-DIS_flat.json");
         console.log(f8DisData);
@@ -24,8 +23,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         return; // Exit if any file fails to load
     }
 
-
-    // Attach event listener to the calculate button
+ // Attach event listener to the calculate button
     const calculateButton = document.querySelector("button[type='submit']");
     calculateButton.addEventListener("click", (event) => {
         event.preventDefault();
@@ -45,8 +43,6 @@ async function fetchJSON(path) {
     }
     return response.json();
 }
-
-// Interpolation
 
 // Interpolation Function
 function interpolateMultiDimensional(data, inputs, targetValues, outputField) {
@@ -209,8 +205,8 @@ function handleCalculation(f8ToData, f8DisData, vrData, v2Data, n1Data, f8MTOWda
     document.getElementById("distance-output").innerText = TOdistance ? `${Math.round(TOdistance)} ft` : "N/A";
 
     // Landing Section Items
-    document.getElementById("ldgDistA-output").innerText = ldgDistA ? `${Math.round(ldgDistA)} ft` : "N/A";
-    document.getElementById("ldgDistF-output").innerText = ldgDistF ? `${Math.round(ldgDistF)} ft` : "N/A";
+    document.getElementById("ldgDistA-output").innerText = ldgDistAct ? `${Math.round(ldgDistAct)} ft` : "N/A";
+    document.getElementById("ldgDistF-output").innerText = ldgDistFact ? `${Math.round(ldgDistFact)} ft` : "N/A";
 }
  
 
